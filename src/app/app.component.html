@@ -1,0 +1,179 @@
+<app-navbar></app-navbar>
+
+<h2 class="title">
+  You have <span class="is-medium has-underline">{{balance}}</span> META
+</h2>
+
+
+<div class="row">
+  
+  <div class="example-2 card">
+    <div class="wrapper">
+      <div class="header">
+        <div class="date">
+          <span class="day">12</span>
+          <span class="month">Aug</span>
+          <span class="year">2016</span>
+        </div>
+        <ul class="menu-content">
+          <li>
+            <a href="#" class="fa fa-bookmark-o"></a>
+          </li>
+          <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
+          <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
+        </ul>
+      </div>
+      <div class="data">
+        <div class="content">
+          <span class="author">Jane Doe</span>
+          <h1 class="title"><a href="#">Stranger Things: The sound of the Upside Down</a></h1>
+          <p class="text">The antsy bingers of Netflix will eagerly anticipate the digital release of the Survive soundtrack, out today.</p>
+          <a class="button text-color" href="#popUp" id="openPopUp" (click)='setupFunction("JaneDoe", "Stranger Things: The sound of the Upside Down",32)'>Read more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-2 card">
+    <div class="wrapper">
+      <div class="header">
+        <div class="date">
+          <span class="day">12</span>
+          <span class="month">Aug</span>
+          <span class="year">2016</span>
+        </div>
+        <ul class="menu-content">
+          <li>
+            <a href="#" class="fa fa-bookmark-o"></a>
+          </li>
+          <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
+          <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
+        </ul>
+      </div>
+      <div class="data">
+        <div class="content">
+          <span class="author">Jane Doe</span>
+          <h1 class="title"><a href="#">Stranger Things: The sound of the Upside Down</a></h1>
+          <p class="text">The antsy bingers of Netflix will eagerly anticipate the digital release of the Survive soundtrack, out today.</p>
+          <a class="button text-color" href="#popUp" id="openPopUp" (click)='setupFunction("JaneDoe", "F.R.I.E.N.D.S",50)'>Read more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-2 card">
+    <div class="wrapper">
+      <div class="header">
+        <div class="date">
+          <span class="day">12</span>
+          <span class="month">Aug</span>
+          <span class="year">2016</span>
+        </div>
+        <ul class="menu-content">
+          <li>
+            <a href="#" class="fa fa-bookmark-o"></a>
+          </li>
+          <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
+          <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
+        </ul>
+      </div>
+      <div class="data">
+        <div class="content">
+          <span class="author">Jane Doe</span>
+          <h1 class="title"><a href="#">Stranger Things: The sound of the Upside Down</a></h1>
+          <p class="text">The antsy bingers of Netflix will eagerly anticipate the digital release of the Survive soundtrack, out today.</p>
+          <a class="button text-color" href="#popUp" id="openPopUp" (click)='setupFunction("JaneDoe", "The Big Bng Theory",12)'>Buy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<aside id="popUp" class="popup">
+  <div class="popUpContainer">
+     <header>
+      <a href="#!" class="closePopUp">X</a>
+      <h2>BUY {{title}}</h2>
+     </header>
+    <article>
+      <h1>title : {{title}}</h1>
+      <p>Singer : {{singer}}</p>
+      <p>Price : {{price}}</p>
+
+      <div class="container">
+        <h1 class="title">Send Metacoin</h1>
+        <h1 class="title is-4 is-info help">{{status}}</h1>
+      
+        <form #coinForm="ngForm">
+          <div class="field">
+            <label class="label">Amount</label>
+            <p class="control">
+              <input
+                [(ngModel)]="sendingAmount"
+                class="input"
+                type="text"
+                placeholder="95"
+                name="sendingAmount"
+                required
+                #sendingAmountModel="ngModel">
+            </p>
+            <div *ngIf="sendingAmountModel.errors && (sendingAmountModel.dirty || sendingAmountModel.touched)"
+                 class="help is-danger">
+                <p [hidden]="!sendingAmountModel.errors.required">
+                  This field is required
+                </p>
+            </div>
+            <div *ngIf="!sendingAmountModel.errors && (sendingAmountModel.dirty || sendingAmountModel.touched)"
+                 class="help is-danger">
+                <p [hidden]="canBeNumber(sendingAmount)">
+                  Must be a number
+                </p>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">To Address</label>
+            <p class="control">
+              <input
+                [(ngModel)]="recipientAddress"
+                name="recipientAddress"
+                class="input"
+                type="text"
+                placeholder="0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"
+                name="recipientAddress"
+                required
+                #recipientAddressModel="ngModel"
+              >
+            </p>
+            <div *ngIf="recipientAddressModel.errors && (recipientAddressModel.dirty || recipientAddressModel.touched)"
+                 class="help is-danger">
+                <p [hidden]="!recipientAddressModel.errors.required">
+                  This field is required
+                </p>
+            </div>
+            <div *ngIf="!recipientAddressModel.errors && (recipientAddressModel.dirty || recipientAddressModel.touched)"
+                 class="help is-danger">
+                <p [hidden]="canBeNumber(recipientAddress)">
+                  Must be a number
+                </p>
+            </div>
+          </div>
+      
+          <div class="field is-grouped">
+            <p class="control">
+              <button
+                [disabled]="!coinForm.valid"
+                (click)="sendCoin()"
+                class="button is-primary">
+                Send
+              </button>
+            </p>
+          </div>
+        </form>
+      
+        <strong>Hint:</strong> open the browser developer console to view any errors and warnings.
+      
+      </div>
+    </article>
+ </div>        
+ <a href="#!" class="closePopUpOutSide"></a>    
+</aside>
